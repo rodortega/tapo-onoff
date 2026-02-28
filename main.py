@@ -7,11 +7,11 @@ from tapo import ApiClient
 
 load_dotenv()
 
-USERNAME = os.getenv("USERNAME")
-PASSWORD = os.getenv("PASSWORD")
+TAPO_USERNAME = os.getenv("TAPO_USERNAME")
+TAPO_PASSWORD = os.getenv("TAPO_PASSWORD")
 
-if not USERNAME or not PASSWORD:
-    raise RuntimeError("Set USERNAME and PASSWORD in .env")
+if not TAPO_USERNAME or not TAPO_PASSWORD:
+    raise RuntimeError("Set TAPO_USERNAME and TAPO_PASSWORD in .env")
 
 devices_path = os.path.join(os.path.dirname(__file__), "devices.json")
 if not os.path.exists(devices_path):
@@ -32,7 +32,7 @@ app = FastAPI(title="tapo-fastapi")
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    app.state.tapo_client = ApiClient(USERNAME, PASSWORD)
+    app.state.tapo_client = ApiClient(TAPO_USERNAME, TAPO_PASSWORD)
     try:
         yield
     finally:
