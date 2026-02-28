@@ -69,12 +69,12 @@ async def switch_devices(action: str):
     return {"action": action, "results": results}
 
 
-@app.post("/switch/on")
+@app.get("/switch/on")
 async def switch_on():
     return await switch_devices("on")
 
 
-@app.post("/switch/off")
+@app.get("/switch/off")
 async def switch_off():
     return await switch_devices("off")
 
